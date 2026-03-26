@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Interactive Form</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+}
+
+.container{
+    width:350px;
+    margin:100px auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input{
+    width:100%;
+    padding:8px;
+    margin:8px 0;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#007BFF;
+    color:white;
+    border:none;
+}
+
+.error{
+    color:red;
+    font-size:14px;
+}
+
+.success{
+    color:green;
+    font-size:16px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Student Registration</h2>
+
+<form id="myForm">
+
+<label>Name</label>
+<input type="text" id="name">
+
+<label>Email</label>
+<input type="text" id="email">
+
+<label>Password</label>
+<input type="password" id="password">
+
+<button type="submit">Submit</button>
+
+<p id="message"></p>
+
+</form>
+
+</div>
+
+<script>
+
+document.getElementById("myForm").addEventListener("submit", function(event){
+
+event.preventDefault();
+
+let name = document.getElementById("name").value;
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+let message = document.getElementById("message");
+
+if(name === "" || email === "" || password === ""){
+message.innerHTML = "All fields are required!";
+message.className = "error";
+return;
+}
+
+let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+if(!email.match(emailPattern)){
+message.innerHTML = "Enter a valid email!";
+message.className = "error";
+return;
+}
+
+if(password.length < 6){
+message.innerHTML = "Password must be at least 6 characters!";
+message.className = "error";
+return;
+}
+
+message.innerHTML = "Form submitted successfully!";
+message.className = "success";
+
+});
+
+</script>
+
+</body>
+</html>

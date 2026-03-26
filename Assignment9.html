@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Weather Dashboard</title>
+
+<style>
+body{
+font-family: Arial;
+text-align:center;
+background:#f2f2f2;
+}
+
+.container{
+background:white;
+width:300px;
+margin:auto;
+margin-top:100px;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+}
+
+input{
+padding:8px;
+width:65%;
+}
+
+button{
+padding:8px;
+}
+
+#loading{color:blue;}
+#error{color:red;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Weather Dashboard</h2>
+
+<input type="text" id="city" placeholder="Enter city name">
+<button onclick="getWeather()">Search</button>
+
+<p id="loading"></p>
+<p id="error"></p>
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const weatherData={
+"Bangalore":{temp:28,weather:"Cloudy",humidity:60},
+"Delhi":{temp:35,weather:"Sunny",humidity:40},
+"Mumbai":{temp:30,weather:"Rainy",humidity:75},
+"London":{temp:18,weather:"Foggy",humidity:65}
+}
+
+function getWeather(){
+
+let city=document.getElementById("city").value
+let loading=document.getElementById("loading")
+let error=document.getElementById("error")
+let result=document.getElementById("result")
+
+loading.innerText="Loading..."
+error.innerText=""
+result.innerHTML=""
+
+setTimeout(()=>{
+
+loading.innerText=""
+
+if(weatherData[city]){
+
+let data=weatherData[city]
+
+result.innerHTML=
+`
+<h3>${city}</h3>
+<p>Temperature: ${data.temp} °C</p>
+<p>Weather: ${data.weather}</p>
+<p>Humidity: ${data.humidity}%</p>
+`
+
+}
+else{
+error.innerText="City not found"
+}
+
+},1000)
+
+}
+
+</script>
+
+</body>
+</html>
